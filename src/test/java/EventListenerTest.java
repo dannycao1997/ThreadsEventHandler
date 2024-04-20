@@ -35,7 +35,7 @@ public class EventListenerTest {
     class TrackerMock implements Tracker {
 
         public boolean itemWasPushed;
-        public boolean eventWasHandled;
+        public boolean eventWasHandled = true;
 
         @Override
         public Map<String, Integer> tracker() {
