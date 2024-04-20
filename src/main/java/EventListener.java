@@ -11,7 +11,7 @@ The Handler should print out the reply
  */
 
 
-public class EventListener {
+public class EventListener extends Thread{
 
     private String messageToListenFor;
     private String messageToReplyWith;
@@ -29,18 +29,23 @@ public class EventListener {
         this.eventTracker = tracker;
     }
 
-    @Override
     public void run() {
+        while(!readyToQuit()){
+            if(shouldReply()){
+                eventTracker.handle(messageToListenFor,this::reply);
+            }
+        }
     }
 
     public Boolean readyToQuit() {
-        return null;
+        return this.eventTracker.has("quit");
     }
 
     public Boolean shouldReply() {
-        return null;
+        return this.eventTracker.has(messageToListenFor);
     }
 
     public void reply() {
+        System.out.println(messageToReplyWith);
     }
 }

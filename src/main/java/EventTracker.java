@@ -22,8 +22,14 @@ public class EventTracker implements Tracker {
     }
 
     synchronized public static EventTracker getInstance() {
-        return INSTANCE; //
+        return EventTracker.INSTANCE; //
     }
+
+    @Override
+    public Map<String, Integer> tracker() {
+        return tracker;
+    }
+
 
     synchronized public void push(String message) {
         tracker.put(message, tracker.getOrDefault(message, 0) + 1 );
